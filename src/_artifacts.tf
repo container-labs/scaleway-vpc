@@ -10,6 +10,10 @@ locals {
   artifact = {
     data = {
       infrastructure = local.data_infrastructure
+      # TODO: remove the below three fields when the scw-vpc artifact-definition exists
+      grn            = "projects/fooobar/one/bizbaz/yep"
+      private_services_access = {}
+      private_service_connect_ip = "five"
     }
     specs = {
       scw = {
