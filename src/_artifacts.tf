@@ -1,8 +1,8 @@
 locals {
   data_infrastructure = {
-    id              = scaleway_vpc_private_network.main.id
-    cidr            = scaleway_vpc_public_gateway_dhcp.main.subnet
-    private_subnets = scaleway_vpc_private_network.main
+    id   = module.virtual_network.id
+    cidr = module.virtual_network.cidr
+    # private_subnets = scaleway_vpc_private_network.main
     # public_subnets   = local.public_subnets
     # internal_subnets = local.internal_subnets
   }
@@ -11,14 +11,14 @@ locals {
     data = {
       infrastructure = local.data_infrastructure
       # TODO: remove the below three fields when the scw-vpc artifact-definition exists
-      grn            = "projects/fooobar/one/bizbaz/yep"
-      private_services_access = {}
+      grn                        = "projects/fooobar/one/bizbaz/yep"
+      private_services_access    = {}
       private_service_connect_ip = "five"
     }
     specs = {
       scw = {
         region = var.region
-        zones  = local.private_region_to_zones[var.region]
+        zones  = module.virtual_network.zones
       }
     }
   }
@@ -26,7 +26,7 @@ locals {
 
 resource "massdriver_artifact" "network" {
   field                = "network"
-  provider_resource_id = scaleway_vpc_private_network.main.id
+  provider_resource_id = module.virtual_network.id
   name                 = "SCW VPC Network"
   artifact             = jsonencode(local.artifact)
 }
