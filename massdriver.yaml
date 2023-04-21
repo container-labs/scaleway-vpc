@@ -1,8 +1,8 @@
 # This file will be used to generate all of the schema-*.json files in a bundle
 schema: draft-07
-name: "scw-vpc"
+name: "scaleway-vpc"
 description: "Scaleway VPC"
-source_url: github.com/massdriver-cloud/scw-vpc
+source_url: github.com/container-labs/scaleway-vpc
 access: "public"
 type: "infrastructure"
 

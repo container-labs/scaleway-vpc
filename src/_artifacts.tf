@@ -16,7 +16,7 @@ locals {
       private_service_connect_ip = "five"
     }
     specs = {
-      scw = {
+      scaleway = {
         region = var.region
         zones  = module.virtual_network.zones
       }
